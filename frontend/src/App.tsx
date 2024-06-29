@@ -1,12 +1,17 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from './components/Signup';
+import Login from './components/Login';
 import './App.css';
 
 function App() {
   return (
-    <div className='flex items-center justify-center h-screen Signup'>
-      <Signup />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
