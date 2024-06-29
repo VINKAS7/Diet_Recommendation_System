@@ -19,6 +19,10 @@ export default function Login() {
   const goToSignup = () => {
     navigate('/');
   };
+    
+  const goToHome = () => {
+    navigate('/Home');
+  };
 
   return (
     <div className="flex items-center justify-center h-screen Signup">
@@ -40,7 +44,7 @@ export default function Login() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className='w-full'>Login</Button>
+          <Button className='w-full' onClick={goToHome}>Login</Button>
         </CardFooter>
         <CardFooter>
 
