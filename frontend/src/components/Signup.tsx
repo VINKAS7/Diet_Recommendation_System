@@ -23,13 +23,13 @@ export default function Signup() {
           </CardHeader>
           <CardContent>
             <div className='grid w-full gap-4'>
-              <div className='flex flex-col items-start space-y-2'>
+              <div className='flex flex-col items-start space-y-2 '>
                 <Label htmlFor="username">Username</Label>
                 <Input id="username" />
               </div>
               <div className='flex flex-col items-start space-y-2'>
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" />
+                <Input id="email"/>
               </div>
               <div className='flex flex-col items-start space-y-2'>
                 <Label htmlFor="password">Password</Label>
@@ -38,7 +38,7 @@ export default function Signup() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button  className='w-full'>Button</Button>
+            <Button  className='w-full'>Sign up</Button>
           </CardFooter>
         </Card>
       </div>
