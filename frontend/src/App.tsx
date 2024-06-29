@@ -1,17 +1,13 @@
-import React from 'react'
-import { Button } from './components/ui/button'
-import { Card } from '@/components/ui/card'
-
-import './App.css'
+import React from 'react';
+import Signup from './components/Signup';
+import './App.css';
 
 function App() {
-
   return (
-    <>
-   <Button>Click me</Button>
-   <Card> </Card>
-    </>
-  )
+    <div className='flex items-center justify-center h-screen Signup'>
+      <Signup />
+    </div>
+  );
 }
 
-export default App
+export default App;
