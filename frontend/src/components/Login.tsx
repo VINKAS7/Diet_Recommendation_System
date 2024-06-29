@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card,CardContent,CardDescription,CardFooter,CardHeader,CardTitle,} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -57,7 +50,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen bg">
       <Card className='w-[350px]'>
         <CardHeader className="text-center">
           <CardTitle>Login</CardTitle>
@@ -76,7 +69,7 @@ export default function Login() {
               </div>
             </div>
             <CardFooter>
-              <Button className='w-full' type="submit">Login</Button>
+              <Button className='w-full mt-5' type="submit">Login</Button>
             </CardFooter>
           </form>
         </CardContent>
