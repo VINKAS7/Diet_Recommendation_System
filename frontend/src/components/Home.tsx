@@ -1,6 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
-
 import {
       Table,
       TableBody,
@@ -8,16 +5,16 @@ import {
       TableHead,
       TableHeader,
       TableRow,
-    } from "@/components/ui/table"
+    } from "./ui/table.tsx"
 
 export default function HomeFunction(){
-
+    return(
     <Table>
   <TableCaption>Enter Your Details of Diet</TableCaption>
   <TableHeader>
     <TableRow>
       <TableHead className="w-[100px]">Categories</TableHead>
-      
+
       <TableHead className="text-right">Food Details</TableHead>
     </TableRow>
   </TableHeader>
@@ -28,7 +25,7 @@ export default function HomeFunction(){
       <button className='text-right'>Enter Food Name</button>
     </TableRow>
   </TableBody>
-</Table>
+</Table>);
 }
 
     

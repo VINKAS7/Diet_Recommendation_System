@@ -1,10 +1,10 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Card,CardContent,CardDescription,CardFooter,CardHeader,CardTitle,} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {Select, SelectContent,SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
+import { Button } from "./ui/button";
+import { Card,CardContent,CardDescription,CardFooter,CardHeader,CardTitle,} from "./ui/card";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import {Select, SelectContent,SelectItem, SelectTrigger, SelectValue,} from "./ui/select";
 
 export function Userinfo() {
   const initialState = {
@@ -36,30 +36,6 @@ export function Userinfo() {
   const resetForm = () => {
     setFormState(initialState);
   };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch("http://api/v1/diet/diet_information", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formState),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to submit form");
-      }
-
-      console.log("Form submitted successfully!");
-      resetForm();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
-
   const navigate = useNavigate();
 
   const goToHome = () => {

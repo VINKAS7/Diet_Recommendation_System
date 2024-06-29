@@ -1,107 +1,90 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Card,CardContent,CardDescription,CardFooter,CardHeader,CardTitle,} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import "../App.css";
-
-export default function Signup() {
+import {useNavigate} from "react-router-dom";
+import {useState} from "react";
+import Modal_Loader from "../components/Modal_Loader.tsx";
+import {DotLottieReact} from "@lottiefiles/dotlottie-react";
+function Signup(){
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [id]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch("https://your-api-endpoint.com/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to sign up");
-      }
-
-      console.log("Signed up successfully!");
-      navigate("/");
-    } catch (error) {
-      console.error("Error signing up:", error);
+  const [fetched, setFetched] = useState<boolean>(false);
+  async function signup_send_data(){
+    setFetched(true);
+    const response = await fetch("http://127.0.0.1:8787/api/v1/user/signup",{
+      method: "POST",
+      body: JSON.stringify({
+        //@ts-ignore
+        fullname: document.getElementById("fullname").value,
+        // @ts-ignore
+        username: document.getElementById("username").value,
+        // @ts-ignore
+        email: document.getElementById("email").value,
+        // @ts-ignore
+        password: document.getElementById("password").value
+      })
+    });
+    const ans = await response.json();
+    if(ans.message === true){
+      localStorage.setItem("user_token",ans.token);
+      navigate("/login");
     }
-  };
-
-  const goToLogin = () => {
-    navigate("/login");
-  };
-
-  return (
-    <div className="flex items-center justify-center h-screen bg">
-      <Card className="w-[350px]">
-        <CardHeader className="text-center">
-          <CardTitle>Register</CardTitle>
-          <CardDescription>Fill out the details below</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit}>
-            <div className="grid w-full gap-4">
-              <div className="flex flex-col items-start space-y-2 ">
-                <Label htmlFor="username">Username</Label>
-                <Input
-                  id="username"
-                  value={formData.username}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col items-start space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex flex-col items-start space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-              </div>
+    else{
+      alert("Not sign up");
+      setFetched(false);
+      navigate("/signup")
+    }
+  }
+  return(
+      <div className={"grid grid-cols-1 lg:grid-cols-2"}>
+        <Modal_Loader active={fetched}/>
+        <div>
+          <div className={"h-screen flex justify-center items-center flex-col p-40"}>
+            <div className={"p-2 font-bold text-4xl text-green-500"}>
+              Create an Account
             </div>
-            <CardFooter>
-              <Button className="w-full mt-5" type="submit">
-                Sign up
-              </Button>
-            </CardFooter>
-          </form>
-        </CardContent>
-        <CardFooter>
-          <label
-            className="w-full cursor-pointer hover:text-green-700 text-center mt-0"
-            onClick={goToLogin}
-          >
-            Already have an account? Login
-          </label>
-        </CardFooter>
-      </Card>
-    </div>
-  );
+            <div className={"text-slate-400"}>
+              Already have an account? <span><a href={"/login"} className={"underline"}>Login</a></span>
+            </div>
+            <div className={"w-[100%] pl-20 pr-20 font-bold p-2 text-lg"}>
+              Fullname
+            </div>
+            <div className={"w-[100%] pl-20 pr-20"}>
+              <input type={"text"} className={"border-2 w-[100%] rounded p-2"} id={"fullname"}
+                     placeholder={"Enter your Full Name"}/>
+            </div>
+            <div className={"w-[100%] pl-20 pr-20 font-bold p-2 text-lg"}>
+              Username
+            </div>
+            <div className={"w-[100%] pl-20 pr-20"}>
+              <input type={"text"} className={"border-2 w-[100%] rounded p-2"} id={"username"}
+                     placeholder={"Enter your username"}/>
+            </div>
+            <div className={"w-[100%] pl-20 pr-20 font-bold p-2 text-lg"}>
+              Email
+            </div>
+            <div className={"w-[100%] pl-20 pr-20"}>
+              <input type={"email"} className={"border-2 w-[100%] rounded p-2"} id={"email"}
+                     placeholder={"m@example.com"}/>
+            </div>
+            <div className={"w-[100%] pl-20 pr-20 font-bold p-2 text-lg"}>
+              Password
+            </div>
+            <div className={"w-[100%] pl-20 pr-20"}>
+              <input type={"password"} className={"border-2 w-[100%] rounded p-2"} id={"password"}/>
+            </div>
+            <div className={"w-[100%] pl-20 pr-20 p-4"}>
+              <button className={"bg-green-500 text-white w-[100%] rounded p-2 font-bold"} onClick={signup_send_data}>Sign
+                Up
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className={"hidden lg:block"}>
+          <DotLottieReact
+              src="https://lottie.host/3b06d69a-f645-41d3-af0e-3d75f4fc216e/IBzyVs5ZIU.lottie"
+              loop
+              autoplay
+           className={"ml-10 pt-[22%]"} />
+        </div>
+      </div>
+  )
 }
+
+export default Signup;
