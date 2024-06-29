@@ -18,7 +18,7 @@ export default function Signup() {
 
   
   const goToHome = () => {
-    navigate('/Home');
+    navigate('/');
   };
   const goToLogin = () => {
     navigate('/login');
