@@ -1,46 +1,39 @@
-import * as React from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Card,CardContent,CardDescription,CardFooter,CardHeader,CardTitle,} from "./ui/card";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import {Select, SelectContent,SelectItem, SelectTrigger, SelectValue,} from "./ui/select";
-
+import {useNavigate} from "react-router-dom";
 export function Userinfo() {
-  const initialState = {
-    age: "",
-    gender: "",
-    weight: "",
-    height: "",
-    meds: "",
-    allergies: "",
-  };
-
-  const [formState, setFormState] = React.useState(initialState);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setFormState((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
-  };
-
-  const handleSelectChange = (id: string, value: string) => {
-    setFormState((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
-  };
-
-  const resetForm = () => {
-    setFormState(initialState);
-  };
+  async function send_user_info(){
+    const response = await fetch("http://127.0.0.1:8787/api/v1/diet/diet_information",{
+      method:"POST",
+      headers:{
+        "Authorization":`${localStorage.getItem("user_token")}`
+      },
+      body: JSON.stringify({
+        //@ts-ignore
+        age:document.getElementById("age").value,
+        //@ts-ignore
+        gender:document.getElementById("gender").value,
+        //@ts-ignore
+        weight:document.getElementById("weight").value,
+        //@ts-ignore
+        height:document.getElementById("height").value,
+        //@ts-ignore
+        allergies:document.getElementById("allergies").value,
+        //@ts-ignore
+        medical_condition:document.getElementById("meds").value
+      })
+    });
+    const ans = await response.json();
+    if(ans.message === true){
+      navigate("/home");
+    }
+    else{
+      navigate("/user_info");
+    }
+  }
   const navigate = useNavigate();
-
-  const goToHome = () => {
-    navigate("/");
-  };
   return (
     <div className="flex items-center justify-center h-screen">
       <Card className="w-[350px]">
@@ -59,43 +52,34 @@ export function Userinfo() {
                   id="age"
                   placeholder="Enter your age"
                   type="number"
-                  value={formState.age}
-                  onChange={handleChange}
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="gender">Gender</Label>
-                <Select
-                  value={formState.gender}
-                  onValueChange={(value) => handleSelectChange("gender", value)}
-                >
-                  <SelectTrigger id="gender">
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent position="popper">
-                    <SelectItem value="Male">Male</SelectItem>
-                    <SelectItem value="Female">Female</SelectItem>
-                    <SelectItem value="Others">Others</SelectItem>
-                  </SelectContent>
-                </Select>
+                <form className="max-w-sm mx-auto">
+                  <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
+                  <select id="gender"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option selected>Choose a gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="others">Others</option>
+                  </select>
+                </form>
+
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="weight">Weight</Label>
+                <Label htmlFor="weight">Weight(kg)</Label>
                 <Input
-                  id="weight"
-                  placeholder="Enter your weight (kgs)"
-                  type="number"
-                  value={formState.weight}
-                  onChange={handleChange}
+                    id="weight"
+                    placeholder="Enter your weight (kgs)"
+                    type="number"
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="height">Height</Label>
+                <Label htmlFor="height">Height(cm)</Label>
                 <Input
-                  id="height"
-                  placeholder="Enter your Height"
-                  value={formState.height}
-                  onChange={handleChange}
+                    id="height"
+                    placeholder="Enter your Height"
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
@@ -103,8 +87,6 @@ export function Userinfo() {
                 <Input
                   id="meds"
                   placeholder="Any Medical Condition"
-                  value={formState.meds}
-                  onChange={handleChange}
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
@@ -112,18 +94,18 @@ export function Userinfo() {
                 <Input
                   id="allergies"
                   placeholder="If any allergies"
-                  value={formState.allergies}
-                  onChange={handleChange}
                 />
               </div>
             </div>
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button variant="outline" onClick={resetForm}>
+          <Button variant="outline" onClick={() => {
+            navigate("/user_info")
+          }}>
             Cancel
           </Button>
-          <Button onClick={goToHome}>Submit</Button>
+          <Button onClick={send_user_info}>Submit</Button>
         </CardFooter>
       </Card>
     </div>

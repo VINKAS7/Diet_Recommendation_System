@@ -23,7 +23,7 @@ function Signup(){
     const ans = await response.json();
     if(ans.message === true){
       localStorage.setItem("user_token",ans.token);
-      navigate("/login");
+      navigate("/user_info");
     }
     else{
       alert("Not sign up");

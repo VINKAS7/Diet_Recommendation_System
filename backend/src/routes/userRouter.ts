@@ -72,3 +72,18 @@ userRouter.post("/login",async (c) => {
         })
     }
 })
+userRouter.get("/get_users",async (c) => {
+    const prisma = new PrismaClient({
+        datasourceUrl:c.env.DATABASE_URL
+    }).$extends(withAccelerate());
+    try{
+        const user = await prisma.user.findMany();
+        return c.json(user);
+    }
+    catch(e){
+        c.status(403);
+        return c.json({
+            message:"no users"
+        })
+    }
+})

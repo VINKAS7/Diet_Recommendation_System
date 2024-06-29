@@ -1,31 +1,24 @@
-import {
-      Table,
-      TableBody,
-      TableCaption,
-      TableHead,
-      TableHeader,
-      TableRow,
-    } from "./ui/table.tsx"
+//@ts-ignore
+import NutriCount from './NutriCount';
+import Navbar from './NavBar';
+//@ts-ignore
+import Activity from './Activity';
+//@ts-ignore
+import Tables from './Tables';
 
-export default function HomeFunction(){
-    return(
-    <Table>
-  <TableCaption>Enter Your Details of Diet</TableCaption>
-  <TableHeader>
-    <TableRow>
-      <TableHead className="w-[100px]">Categories</TableHead>
+import '../App.css';
 
-      <TableHead className="text-right">Food Details</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow>
-      <button className='font-medium'>Enter food name</button>
-      <button className='text-right'>Enter Food name</button>
-      <button className='text-right'>Enter Food Name</button>
-    </TableRow>
-  </TableBody>
-</Table>);
+export default function Home(){
+    return (
+        <div className='home bg-green-400'>
+            <Navbar/>
+            <div className='flex justify-between mx-20 my-5'>
+                <Activity/>
+                <NutriCount/>
+            </div>
+            <Tables></Tables>
+        </div>
+
+
+    )
 }
-
-    

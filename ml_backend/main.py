@@ -47,7 +47,7 @@ def home():
 
 
 @app.post("/predict/",response_model=PredictionOut)
-def update_item(prediction_input:PredictionIn):
+    def update_item(prediction_input:PredictionIn):
     recommendation_dataframe=recommend(dataset,prediction_input.nutrition_input,prediction_input.ingredients,prediction_input.params.dict())
     output=output_recommended_recipes(recommendation_dataframe)
     if output is None:

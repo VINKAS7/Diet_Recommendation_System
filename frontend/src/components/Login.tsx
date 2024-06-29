@@ -19,8 +19,9 @@ function Login(){
     });
     const ans = await response.json();
     if(ans.message === true){
+      console.log(ans.token);
       localStorage.setItem("user_token",ans.token);
-      navigate("/home");
+      navigate("/user_info");
     }
     else{
       alert(ans.message);
