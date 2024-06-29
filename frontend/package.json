@@ -10,11 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
     "@hookform/resolvers": "^3.6.0",
     "@radix-ui/react-label": "^2.1.0",
->>>>>>> e58efe35ea7b68dd6f59335d21c272b957586e86
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
