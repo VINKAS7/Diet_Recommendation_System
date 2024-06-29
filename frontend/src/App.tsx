@@ -12,7 +12,10 @@ function App() {
         <Route path="/Signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Navbar />} />
+<<<<<<< HEAD
         <Route path='/navbar' element={ <Navbar />}> </Route>
+=======
+>>>>>>> eb7cfce125e74c3eaeace93042ae20453f15d6d3
       </Routes>
     </BrowserRouter>
   );

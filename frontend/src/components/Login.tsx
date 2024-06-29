@@ -17,11 +17,11 @@ export default function Login() {
   const navigate = useNavigate();
 
   const goToSignup = () => {
-    navigate('/');
+    navigate('/signup');
   };
     
   const goToHome = () => {
-    navigate('/Home');
+    navigate('/');
   };
 
   return (
