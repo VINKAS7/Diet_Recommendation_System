@@ -55,7 +55,7 @@ export function Userinfo() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http", {
+      const response = await fetch("http://api/v1/diet/diet_information", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
