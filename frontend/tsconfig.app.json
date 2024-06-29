@@ -23,12 +23,10 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "@/components/Signup.tsx", "@/components/Signup.tsx"],
 
   "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/components/*": ["src/components/*"]
     }
 }
